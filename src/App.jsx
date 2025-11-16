@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import "./App.css";
+import { useState } from "react";
+import Post from "./component/Post";
+import WelcomeMessage from "./component/Welcome_Messages";
+import ItemList from "./component/ItemList";
 
-function App() {
-  const [count, setCount] = useState(0)
+const posts = [
+  { id: 1, title: "Car", description: "Its Car" },
+  { id: 2, title: "Phone", description: "Its Phone" },
+];
+
+const text = ["Car","Phone", "bicycle"]
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  const onClickBtn = () => {
+    setCount(count + 1);
+    console.log("count", count);
+  };
+
+  const onClickBtnMinus = () => {
+    setCount(count - 1);
+    console.log("count", count);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h2>Hello World</h2>
+      <button onClick={onClickBtn}>+</button>
+      <button onClick={onClickBtnMinus}>-</button>
+      <h3>{count}</h3>
+      {posts.map((post) => (
+        <Post key={post.id} title={post.title} description={post.description} />
+      ))}
+        <WelcomeMessage username={"Maksat"} />
+        <ItemList items={text} />
+      
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
